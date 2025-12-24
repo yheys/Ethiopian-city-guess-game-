@@ -17,6 +17,7 @@ turtle.shape(image)
 
 on_quize=True
 answered_states=[]
+missing_cities=[]
 while on_quize:
     answer=screen.textinput(title=f"Guess the City {len(answered_states)}/50",prompt="Enter the City name:").title()
     if answered_states==50:
@@ -27,12 +28,13 @@ while on_quize:
         win.hideturtle()
         win.write("You Are Winner")
     elif answer == "Exit":
-        on_quize = False
+        [missing_cities.append(city) for city in state if city not in answered_states]
         score = Turtle()
         score.penup()
         score.goto(-200, 0)
         score.hideturtle()
         score.write(f"You got {len(answered_states)} States from 50 States.", font=("Arial", 20,"bold"))
+        on_quize = False
     elif answer in state and answer not in answered_states:
         name=Turtle()
         name.penup()
